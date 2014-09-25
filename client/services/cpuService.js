@@ -14,6 +14,7 @@ angular.module('brtmtApp')
 	
 		socket.socket.on('cpuNews', function(data){
 			var arrayData = [];
+			
 			for(var index in data){
 				var value = data[index] * 100;
 				var severity = 'success';

@@ -31,6 +31,7 @@ angular.module('brtmtApp')
 					series = $scope.seriesPerCPU;
 				break;
 			}
+			
 			$.plot('#flot-line-chart-moving', series, {
 				grid: {
 					borderWidth: 1,
@@ -91,6 +92,7 @@ angular.module('brtmtApp')
 		$scope.$watch('cpuService.cpuPercentage', function(){
 			$scope.cpuPercentage = cpuService.getPercentage();
 			var totalPercentage = 0;
+			
 			for(var index in $scope.cpuPercentage){
 				totalPercentage += $scope.cpuPercentage[index].value / $scope.cpuPercentage.length;
 				if(!$scope.seriesPerCPU[index]){

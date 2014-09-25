@@ -6,7 +6,8 @@ angular.module('brtmtApp', [
   'ngRoute',
   'btford.socket-io',
   'ui.bootstrap',
-  'truncate'
+  'truncate',
+  'timer'
 ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider

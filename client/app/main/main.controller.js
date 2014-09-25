@@ -1,27 +1,11 @@
 'use strict';
 
 angular.module('brtmtApp')
-  .controller('MainCtrl', function ($scope, $http, socket) {
-    $scope.awesomeThings = [];
+  .controller('mainController', function ($scope, $http, socket) {
+    $scope.hostInfo = {};
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-      socket.syncUpdates('thing', $scope.awesomeThings);
+    $http.get('/api/basicInfo').success(function(basicInfo) {
+		$scope.basicInfo = basicInfo;
+		$scope.basicInfo.uptimeTimer = Math.round(new Date().getTime()  - basicInfo.uptime * 1000);
     });
-
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
-        return;
-      }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
-    };
-
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
-    };
-
-    $scope.$on('$destroy', function () {
-      socket.unsyncUpdates('thing');
-    });
-  });
+});

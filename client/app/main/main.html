@@ -6,8 +6,50 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-lg-9">
-		<div class="panel panel-default" ng-controller="cpuController">
+	<div class="col-lg-4">
+		<div class="panel panel-default" ng-controller="mainController">
+			<div class="panel-heading">
+				<img class="panel-header-icon" src="/assets/images/cpu1.png">Basic Info
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-6">
+						<img src="/assets/images/debian.png">
+					</div>
+					<div class="col-lg-6">
+						<div class="row">
+							<div class="col-lg-12">
+								{{ basicInfo.os.type }} 
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								{{ basicInfo.os.release }} ({{ basicInfo.os.architecture }})
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						Hostname:
+					</div>
+					<div class="col-lg-6">
+						{{ basicInfo.hostname }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						Uptime:
+					</div>
+					<div class="col-lg-6">
+						<timer start-time="basicInfo.uptimeTimer">{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-8">
+		<div class="panel panel-default" id="a-kind-of-magic"  ng-controller="cpuController">
 			<div class="panel-heading">
 				<img class="panel-header-icon" src="/assets/images/cpu1.png">CPU Stats
 			</div>
@@ -36,8 +78,9 @@
 			</div>
 		</div>
 	</div>
-	
-	<div class="col-lg-3">
+</div>
+<div class="row">
+	<div class="col-lg-6">
 		<div class="panel panel-default" ng-controller="memoryController">
 			<div class="panel-heading">
 				<img class="panel-header-icon" src="/assets/images/random.png">Memory Stats
@@ -80,8 +123,8 @@
 		</div>
 	</div>
 	
-	<div class="col-lg-3">
-		<div id="a-kind-of-magic" class="panel panel-default" ng-controller="diskController">
+	<div class="col-lg-6">
+		<div class="panel panel-default" ng-controller="diskController">
 			<div class="panel-heading">
 				<img class="panel-header-icon" src="/assets/images/disk.png">Disk Stats
 			</div>
@@ -94,6 +137,26 @@
 					<div class="col-lg-9">
 						<progressbar class="progress" value="diskStats.usage" type="info"></progressbar>
 					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-lg-6">
+		<div class="panel panel-default" ng-controller="processesController">
+			<div class="panel-heading">
+				<img class="panel-header-icon" src="/assets/images/cpu1.png">Processes
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12">					
+						<table class="table table-striped table-hover">
+							<thead>
+								<tr>
+									<th>PID</th>
+								</tr>
+							</thead>
+						</table>
 				</div>
 			</div>
 		</div>

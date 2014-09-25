@@ -14,7 +14,6 @@ angular.module('brtmtApp')
 	
 		socket.socket.on('diskNews', function(data){
 			salida.diskStats = data;
-			console.log(data);
 		});
 		
 		return salida;

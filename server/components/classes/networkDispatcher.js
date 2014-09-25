@@ -6,7 +6,7 @@ NetworkDispatcher.prototype = new BaseDispatcher();
 NetworkDispatcher.prototype.constructor=NetworkDispatcher;
 function NetworkDispatcher(io, mongoose){
 	this.frequency = '30 second';
-	this.saveFrequency = '10 seconds';
+	this.saveFrequency = '60 seconds';
 	this.socketMessage = 'networkNews';
 	this.io = io;
 	
