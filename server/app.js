@@ -55,6 +55,14 @@ for(var dispatcherId in dispatchers){
 	dispatchers[dispatcherId].run();
 }
 
+socketio.on('connection', function(){
+	for(var dispatcherId in dispatchers){
+		dispatchers[dispatcherId].io.sockets.emit(
+			dispatchers[dispatcherId].socketMessage, 
+			dispatchers[dispatcherId].data
+		);
+	}
+});
 
 // Expose app
 exports = module.exports = app;

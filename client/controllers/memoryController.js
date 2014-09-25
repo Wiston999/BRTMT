@@ -19,7 +19,13 @@ angular.module('brtmtApp')
 			$scope.swap = $scope.memoryService.getUsage().swap;
 			
 			var ramBarType = 'info';
-			var ramBarValue = ($scope.ram.total - $scope.ram.free) / $scope.ram.total * 100;
+			try{
+				var ramBarValue = ($scope.ram.total - $scope.ram.free) / $scope.ram.total * 100;
+			}catch(Exception){
+				console.log($scope.ram);
+				console.log($scope.memoryService.getUsage().ram);
+				console.log($scope.memoryService);
+			}
 			if(ramBarValue >= 20 && ramBarValue < 40){
 				ramBarType = 'primary';
 			}else if(ramBarValue >= 40 && ramBarValue < 70){

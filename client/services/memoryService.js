@@ -6,8 +6,17 @@ angular.module('brtmtApp')
 		
 		var salida = {};
 
-		salida.memoryUsage = {};
-	
+		salida.memoryUsage = {
+			ram: {
+				total: 0,
+				free: 0
+			},
+			swap: {
+				total: 0,
+				free: 0
+			}
+		};
+		
 		salida.getUsage = function(){
 			return salida.memoryUsage;
 		}
@@ -15,10 +24,6 @@ angular.module('brtmtApp')
 		socket.socket.on('memoryNews', function(data){
 			salida.memoryUsage = data;
 		});
-		
-		salida.onNews = function(callback){
-			
-		}
 		
 		return salida;
 	}

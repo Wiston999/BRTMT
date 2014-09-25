@@ -27,14 +27,7 @@ angular.module('brtmtApp')
 				arrayData.push({id: index, value: value, severity: severity});
 			}
 			salida.cpuPercentage = arrayData;
-			if(salida.callback){
-				salida.callback(salida.cpuPercentage);
-			}
 		});
-		
-		salida.onNews = function(callback){
-			salida.callback = callback;
-		}
 		
 		return salida;
 	}
