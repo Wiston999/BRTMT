@@ -162,7 +162,8 @@
 							</thead>
 							<tbody>
 								<tr><input ng-model="procSearch" />
-								<tr ng-repeat="process in processes.procs | filter:procSearch ">
+								<tr><input type="range" min="5" max="100" ng-model="procsShowed" />
+								<tr ng-repeat="process in processes.procs | filter:procSearch | limitTo:procsShowed | orderBy:orderProp ">
 									<td>{{ process.pid }}</td>
 									<td>{{ process.user }}</td>
 									<td><timer start-time="process.etimeEpoch" ng-disabled="true">{{ddays}}:{{hhours}}-{{mminutes}}-{{sseconds}}</timer></td>

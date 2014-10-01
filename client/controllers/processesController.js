@@ -7,6 +7,7 @@ angular.module('brtmtApp')
 		$scope.orderProp = 'etime';
 		$scope.orderReverse = false;
 		$scope.procSearch = '';
+		$scope.procsShowed = 10;
 		
 		$scope.$watch('processesService.processes', function(){
 			$scope.processes = $scope.processesService.getProcesses();
