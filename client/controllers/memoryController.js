@@ -9,6 +9,8 @@ angular.module('brtmtApp')
 		$scope.ramBar = {};
 		$scope.swapBar = {};
 		
+		$scope.ramValues = [];
+		
 		$scope.ramTooltip = '';
 		$scope.swapTooltip = '';
 		
@@ -18,28 +20,38 @@ angular.module('brtmtApp')
 			$scope.ram = $scope.memoryService.getUsage().ram;
 			$scope.swap = $scope.memoryService.getUsage().swap;
 			
-			var ramBarType = 'info';
-			try{
-				var ramBarValue = ($scope.ram.total - $scope.ram.free) / $scope.ram.total * 100;
-			}catch(Exception){
-				console.log($scope.ram);
-				console.log($scope.memoryService.getUsage().ram);
-				console.log($scope.memoryService);
-			}
-			if(ramBarValue >= 20 && ramBarValue < 40){
-				ramBarType = 'primary';
-			}else if(ramBarValue >= 40 && ramBarValue < 70){
-				ramBarType = 'warning';
-			}else if(ramBarValue >= 70){
-				ramBarType = 'danger';
+			var ramUsage = {};
+			
+			for(var type in $scope.ram){
+				ramUsage[type] = (parseInt($scope.ram[type]) / parseInt($scope.ram.total)) * 100;
 			}
 			
-			$scope.ramBar = {
-				value: ramBarValue,
-				type: ramBarType
-			};
+			var usedRam = parseInt($scope.ram.total) - parseInt($scope.ram.free);
 			
-			$scope.ramTooltip = 'Used '+ramBarValue.toFixed(2)+' % of '+$filter("unittransform")($scope.ram.total, 'MB', 2)+' MB';
+			$scope.ramValues = [
+				{
+					value: (usedRam - (parseInt($scope.ram.cached) + parseInt($scope.ram.buffered) + parseInt($scope.ram.shared))) / $scope.ram.total * 100,
+					name: 'Used',
+					type: 'danger'
+				},
+				{
+					value: ramUsage.buffered,
+					name: 'Buffered',
+					type: 'warning'
+				},
+				{
+					value: ramUsage.cached,
+					name: 'Cached',
+					type: 'success'
+				},
+				{
+					value: ramUsage.shared,
+					name: 'shared',
+					type: 'default'
+				}
+			];
+			
+			// $scope.ramTooltip = 'Used '+ramBarValue.toFixed(2)+' % of '+$filter("unittransform")($scope.ram.total, 'MB', 2)+' MB';
 			
 			var swapBarType = 'info';
 			var swapBarValue = ($scope.swap.total - $scope.swap.free) / $scope.swap.total * 100;
@@ -59,19 +71,4 @@ angular.module('brtmtApp')
 			$scope.swapTooltip = 'Used '+swapBarValue.toFixed(2)+' % of '+$filter("unittransform")($scope.swap.total, 'MB', 2)+' MB'
 		});
 	}	
-).filter('unittransform', function() {
-    return function(input, unit, round) {
-		var factor = 1;
-		var numRound = round || 3;
-		switch(unit){
-			case 'MB':
-				factor = 1024;
-			break;
-			case 'GB':
-				factor = 1024*1024;
-			break;
-		}
-		input = parseInt(input);
-		return (input / factor).toFixed(numRound);
-    }
-});
+);

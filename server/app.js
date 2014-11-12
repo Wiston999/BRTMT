@@ -33,11 +33,11 @@ server.listen(config.port, config.ip, function () {
   console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
 });
 
-var CpuDispatcher = require('./components/classes/cpuDispatcher.js');
-var MemoryDispatcher = require('./components/classes/memoryDispatcher.js');
-var UsersDispatcher = require('./components/classes/usersDispatcher.js');
-var ProcessesDispatcher = require('./components/classes/processesDispatcher.js');
-var DiskDispatcher = require('./components/classes/diskDispatcher.js');
+var CpuDispatcher 		= require('./components/classes/dispatchers/cpuDispatcher.js');
+var MemoryDispatcher 	= require('./components/classes/dispatchers/memoryDispatcher.js');
+var UsersDispatcher 	= require('./components/classes/dispatchers/usersDispatcher.js');
+var ProcessesDispatcher = require('./components/classes/dispatchers/processesDispatcher.js');
+var DiskDispatcher 		= require('./components/classes/dispatchers/diskDispatcher.js');
 
 console.log('Creating Dispatchers');
 var dispatchers = new Array();
